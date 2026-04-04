@@ -4,7 +4,8 @@
   "description": "AI agent observability — structured logging for LLM calls, tool calls, and reasoning steps",
   "private": true,
   "scripts": {
-    "build": "pnpm --filter @agentlens/core build && pnpm --filter @agentlens/transport build && pnpm --filter @agentlens/privacy build && pnpm --filter @agentlens/interceptors build && pnpm --filter @agentlens/renderer build && pnpm --filter @agentlens/cli build",
+    "clean": "find packages -type d -name dist -exec rm -rf {} + 2>/dev/null || true && find packages -name .tsbuildinfo -delete 2>/dev/null || true",
+    "build": "pnpm clean && pnpm --filter @agentlens/core build && pnpm --filter @agentlens/transport build && pnpm --filter @agentlens/privacy build && pnpm --filter @agentlens/interceptors build && pnpm --filter @agentlens/renderer build && pnpm --filter @agentlens/cli build",
     "test": "pnpm -r test",
     "lint": "eslint packages/*/src/**/*.ts",
     "typecheck": "pnpm -r typecheck"
