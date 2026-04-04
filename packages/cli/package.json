@@ -1,0 +1,25 @@
+{
+  "name": "@agentlens/cli",
+  "version": "1.0.0",
+  "description": "AgentLens command-line interface",
+  "type": "module",
+  "bin": {
+    "agentlens": "./dist/index.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agentlens/core": "workspace:*",
+    "@agentlens/renderer": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0",
+    "@types/node": "^20.0.0"
+  }
+}
