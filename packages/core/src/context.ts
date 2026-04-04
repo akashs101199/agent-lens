@@ -1,5 +1,4 @@
 import { AsyncLocalStorage } from 'async_hooks'
-import { randomUUID } from 'crypto'
 
 /**
  * Represents the current agent run context.
@@ -22,9 +21,11 @@ function randomHex(length: number): string {
 
 /**
  * Creates a new run context with a unique run_id and trace_id.
- * @param agentName - The name of the agent (used for logging, not in ID generation)
+ * @param agentName - The name of the agent (reserved for future logging)
  */
 export function createRunContext(agentName: string): RunContext {
+  // agentName is reserved for future logging features
+  void agentName
   return {
     run_id: `run_${Date.now()}_${randomHex(6)}`,
     trace_id: `trace_${randomHex(12)}`,
