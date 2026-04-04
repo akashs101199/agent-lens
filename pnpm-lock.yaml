@@ -48,6 +48,9 @@ importers:
 
   packages/core:
     devDependencies:
+      '@agentlens/transport':
+        specifier: workspace:*
+        version: link:../transport
       '@types/node':
         specifier: ^20.0.0
         version: 20.19.39

@@ -45,3 +45,13 @@ export {
   ContextError,
   InterceptorError,
 } from './errors.js'
+
+export {
+  AgentLens,
+  type PrivacyConfig,
+  type AgentLensConfig,
+  type StartRunOptions,
+  type AgentRun,
+  type ManualLogOptions,
+  type Transport,
+} from './agentlens.js'
