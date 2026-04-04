@@ -4,3 +4,5 @@
  */
 
 export { wrapTool, setToolTransport, type WrapToolOptions, type ToolTransportConfig } from './tool.js'
+export { wrapAnthropic, type AnthropicClient } from './anthropic.js'
+export { ANTHROPIC_COSTS, OPENAI_COSTS, calculateCost, type ModelCostTable } from './costs.js'

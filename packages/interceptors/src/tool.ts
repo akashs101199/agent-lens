@@ -35,6 +35,14 @@ export function setToolTransport(config: ToolTransportConfig): void {
 }
 
 /**
+ * Gets the current tool transport configuration.
+ * @internal
+ */
+export function getToolTransport(): ToolTransportConfig | undefined {
+  return toolTransport
+}
+
+/**
  * Wraps any async function as an AgentLens-traced tool.
  * Automatically captures input, output, duration, and status.
  *
