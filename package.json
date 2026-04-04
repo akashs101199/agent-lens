@@ -4,7 +4,7 @@
   "description": "AI agent observability — structured logging for LLM calls, tool calls, and reasoning steps",
   "private": true,
   "scripts": {
-    "build": "pnpm -r build",
+    "build": "pnpm --filter @agentlens/core build && pnpm --filter @agentlens/transport build && pnpm --filter @agentlens/privacy build && pnpm --filter @agentlens/interceptors build && pnpm --filter @agentlens/renderer build && pnpm --filter @agentlens/cli build",
     "test": "pnpm -r test",
     "lint": "eslint packages/*/src/**/*.ts",
     "typecheck": "pnpm -r typecheck"

@@ -173,6 +173,7 @@ export class AgentLens {
     if (typeof this.transportConfig === 'string') {
       // Dynamically import transport types
       try {
+        // @ts-expect-error - transport is imported dynamically and may not be available
         const { ConsoleTransport, FileTransport } = await import('@agentlens/transport')
 
         if (this.transportConfig === 'console') {
