@@ -1,5 +1,23 @@
 /**
  * @agentlens/privacy — Privacy engine with PII detection and redaction
+ * Automatically detects and redacts personally identifiable information.
  */
 
-// Placeholder for privacy package
+export {
+  detectEmail,
+  detectApiKey,
+  detectCreditCard,
+  detectPhoneUS,
+  detectSSN,
+  detectPassword,
+  detectAllPII,
+  type DetectionResult,
+} from './detectors.js'
+
+export {
+  redactString,
+  redactObject,
+  type RedactionMode,
+  type RedactionOptions,
+  type RedactionResult,
+} from './redactor.js'
