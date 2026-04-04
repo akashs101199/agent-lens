@@ -1,0 +1,21 @@
+{
+  "name": "agentlens-anthropic-basic-example",
+  "version": "1.0.0",
+  "description": "Basic example using AgentLens with Anthropic SDK",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "dependencies": {
+    "@agentlens/core": "workspace:*",
+    "@agentlens/transport": "workspace:*",
+    "@agentlens/renderer": "workspace:*",
+    "@agentlens/interceptors": "workspace:*",
+    "@anthropic-ai/sdk": "^0.28.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.0",
+    "typescript": "^5.4.0"
+  }
+}

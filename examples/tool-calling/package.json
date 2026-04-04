@@ -1,0 +1,19 @@
+{
+  "name": "agentlens-tool-calling-example",
+  "version": "1.0.0",
+  "description": "Tool calling example with AgentLens showing multi-step agent",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "dependencies": {
+    "@agentlens/core": "workspace:*",
+    "@agentlens/transport": "workspace:*",
+    "@agentlens/renderer": "workspace:*"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.0",
+    "typescript": "^5.4.0"
+  }
+}
