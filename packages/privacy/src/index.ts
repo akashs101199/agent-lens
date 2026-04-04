@@ -13,3 +13,11 @@ export {
   detectAllPII,
   type DetectionResult,
 } from './detectors.js'
+
+export {
+  redactString,
+  redactObject,
+  type RedactionMode,
+  type RedactionOptions,
+  type RedactionResult,
+} from './redactor.js'
