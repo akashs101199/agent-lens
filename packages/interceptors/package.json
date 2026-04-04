@@ -1,0 +1,39 @@
+{
+  "name": "@agentlens/interceptors",
+  "version": "1.0.0",
+  "description": "AgentLens SDK interceptors for Anthropic, OpenAI, and custom tools",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agentlens/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "@anthropic-ai/sdk": ">=0.20.0",
+    "openai": ">=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@anthropic-ai/sdk": {
+      "optional": true
+    },
+    "openai": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0",
+    "@types/node": "^20.0.0"
+  }
+}
