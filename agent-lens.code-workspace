@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../Downloads/agentlens/{specs,.github"
+		},
+		{
+			"path": "../../../Downloads/agentlens/packages"
+		},
+		{
+			"path": "../../../Downloads/agentlens/docs"
+		},
+		{
+			"path": "../../../Downloads/agentlens/examples"
+		},
+		{
+			"path": "../../../Downloads/agentlens/specs"
+		}
+	],
+	"settings": {}
+}
