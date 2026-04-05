@@ -1,6 +1,5 @@
 import { promises as fs } from 'fs'
 import { existsSync } from 'fs'
-import { join } from 'path'
 
 /**
  * Initialize AgentLens configuration for the current project.

@@ -1,4 +1,3 @@
-import { promises as fs } from 'fs'
 import { createReadStream } from 'fs'
 import { createInterface } from 'readline'
 import type { ARLSEvent } from '@agentlens/core'
