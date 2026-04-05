@@ -1,0 +1,9 @@
+{
+  "name": "schema-codegen",
+  "version": "1.0.0",
+  "description": "Code generator for ARLS schema (TypeScript → Python)",
+  "type": "module",
+  "scripts": {
+    "generate": "ts-node generate.ts"
+  }
+}

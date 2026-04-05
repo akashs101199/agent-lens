@@ -1,0 +1,62 @@
+[tool.poetry]
+name = "agentlens-workspace"
+version = "0.1.0"
+description = "AgentLens Python SDK - AI agent observability workspace"
+authors = ["AgentLens Contributors <hello@agentlens.dev>"]
+license = "MIT"
+readme = "../README.md"
+repository = "https://github.com/anthropics/agentlens"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pytest-asyncio = "^0.23.0"
+pytest-cov = "^4.1.0"
+mypy = "^1.7.0"
+black = "^23.12.0"
+ruff = "^0.1.8"
+
+[tool.pydantic]
+plugins = []
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = "anthropic.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "openai.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "langchain.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "aiofiles"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["agentlens-core/tests", "agentlens-interceptors/tests", "agentlens-privacy/tests", "agentlens-renderer/tests", "agentlens-transport/tests", "agentlens-cli/tests", "agentlens/tests"]
+asyncio_mode = "auto"
+addopts = "--cov=. --cov-report=term --cov-report=html --cov-fail-under=80"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

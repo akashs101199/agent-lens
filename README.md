@@ -2,7 +2,7 @@
 
 **Structured observability for AI agents — understand what your agent is doing, step by step.**
 
-![Status](https://img.shields.io/badge/status-production--ready-brightgreen) ![TypeScript](https://img.shields.io/badge/TypeScript-5.4%2B-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Built with Claude](https://img.shields.io/badge/Built%20with-Claude%20Code-purple)
+![Status](https://img.shields.io/badge/status-production--ready-brightgreen) ![TypeScript](https://img.shields.io/badge/TypeScript-5.4%2B-blue) ![Python](https://img.shields.io/badge/Python-3.11%2B-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Built with Claude](https://img.shields.io/badge/Built%20with-Claude%20Code-purple)
 
 ---
 
@@ -166,6 +166,8 @@ Most existing observability tools fall into one of these categories:
 
 ### 1. Installation
 
+#### TypeScript / Node.js
+
 ```bash
 npm install @agentlens/core @agentlens/transport @agentlens/renderer
 ```
@@ -175,6 +177,20 @@ Or with SDK interceptors:
 ```bash
 npm install @agentlens/core @agentlens/transport @agentlens/interceptors
 npm install @anthropic-ai/sdk  # or: npm install openai
+```
+
+#### Python 3.11+
+
+```bash
+pip install agentlens
+```
+
+Or with specific SDK support:
+
+```bash
+pip install agentlens anthropic  # For Anthropic SDK
+pip install agentlens openai     # For OpenAI SDK
+pip install agentlens langchain  # For LangChain integration
 ```
 
 ### 2. Initialize AgentLens
@@ -609,7 +625,7 @@ Both examples output logs in `human` mode to the console, demonstrating the full
 
 ### Current Release (v1.0) — MVP ✅
 
-**What's done:**
+**TypeScript Implementation — Complete:**
 - Full TypeScript library with 6 packages
 - Anthropic & OpenAI SDK integration
 - Privacy-first PII detection and redaction
@@ -618,11 +634,23 @@ Both examples output logs in `human` mode to the console, demonstrating the full
 - Comprehensive examples and documentation
 - 268 tests with 80%+ coverage
 
+**🎉 Python SDK (v1.0) — Complete:**
+- 7 packages (core, interceptors, privacy, renderer, transport, CLI, main API)
+- Anthropic & OpenAI SDK integration
+- **LangChain callback handler** (Python exclusive!)
+- Full PII detection and redaction with 6 detector types
+- Human-readable terminal output with emoji (using rich)
+- AI-readable JSONL output
+- Command-line tools (init, trace, analyze)
+- 300+ tests with 80%+ coverage
+- Full type safety with mypy --strict
+- Complete documentation and working examples
+
 ---
 
 ## Development
 
-### Build
+### TypeScript Development
 
 ```bash
 # Build all packages in correct dependency order
@@ -633,11 +661,7 @@ pnpm --filter @agentlens/core build
 
 # TypeScript strict mode check
 pnpm typecheck
-```
 
-### Test
-
-```bash
 # Run all tests
 pnpm test
 
@@ -649,6 +673,28 @@ pnpm --filter @agentlens/core test
 
 # Coverage
 pnpm test -- --coverage
+```
+
+### Python Development
+
+```bash
+# Navigate to python directory
+cd python
+
+# Install all packages in development mode
+poetry install
+
+# Run type checking
+poetry run mypy --strict
+
+# Run tests for all packages
+poetry run pytest
+
+# Run tests with coverage
+poetry run pytest --cov
+
+# Build all packages
+poetry build
 ```
 
 ### Lint

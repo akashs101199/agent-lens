@@ -1,0 +1,77 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "agentlens-cli"
+version = "1.0.0"
+description = "CLI tools for AgentLens — visualize and analyze agent logs"
+authors = ["AgentLens Contributors"]
+license = "MIT"
+readme = "README.md"
+packages = [{ include = "agentlens_cli" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+agentlens-core = { path = "../agentlens-core" }
+agentlens-renderer = { path = "../agentlens-renderer" }
+typer = "^0.24.0"
+rich = "^13.9.0"
+
+[tool.poetry.scripts]
+agentlens = "agentlens_cli.main:app"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.4.4"
+pytest-asyncio = "^0.23.8"
+pytest-cov = "^4.1.0"
+mypy = "^1.8.0"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.coverage.run]
+source = ["agentlens_cli"]
+
+[tool.coverage.report]
+fail_under = 80
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "^\\s*pass\\s*$",
+]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = false
+warn_unused_configs = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+disallow_any_unimported = false
+disallow_any_expr = false
+disallow_any_decorated = true
+disallow_any_explicit = false
+disallow_any_generics = false
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = "typer.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "agentlens_cli.commands.*"
+disallow_any_expr = false
+disallow_any_explicit = false
+warn_return_any = false

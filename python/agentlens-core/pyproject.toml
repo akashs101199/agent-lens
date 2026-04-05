@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "agentlens-core"
+version = "0.1.0"
+description = "AgentLens core package - ARLS schema types and context propagation"
+authors = ["AgentLens Contributors <hello@agentlens.dev>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/anthropics/agentlens"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pytest-asyncio = "^0.23.0"
+pytest-cov = "^4.1.0"
+mypy = "^1.7.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

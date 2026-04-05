@@ -8,7 +8,8 @@
     "build": "pnpm clean && pnpm --filter @agentlens/core build && pnpm --filter @agentlens/transport build && pnpm --filter @agentlens/privacy build && pnpm --filter @agentlens/interceptors build && pnpm --filter @agentlens/renderer build && pnpm --filter @agentlens/cli build",
     "test": "pnpm -r test",
     "lint": "eslint packages/*/src/**/*.ts",
-    "typecheck": "pnpm -r typecheck"
+    "typecheck": "pnpm -r typecheck",
+    "codegen:python": "cd tools/schema-codegen && ts-node generate.ts"
   },
   "devDependencies": {
     "typescript": "^5.4.0",
