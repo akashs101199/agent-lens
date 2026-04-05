@@ -6,9 +6,10 @@ build-backend = "poetry.core.masonry.api"
 name = "agentlens"
 version = "1.0.0"
 description = "AI agent observability — structured logging for LLM calls, tool calls, and reasoning steps"
-authors = ["AgentLens Contributors"]
+authors = ["AgentLens Contributors <hello@agentlens.dev>"]
 license = "MIT"
 readme = "README.md"
+repository = "https://github.com/akashs101199/agent-lens"
 packages = [{ include = "agentlens" }]
 
 [tool.poetry.dependencies]

@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "agentlens-workspace"
-version = "0.1.0"
+version = "1.0.0"
 description = "AgentLens Python SDK - AI agent observability workspace"
 authors = ["AgentLens Contributors <hello@agentlens.dev>"]
 license = "MIT"
 readme = "../README.md"
-repository = "https://github.com/anthropics/agentlens"
+repository = "https://github.com/akashs101199/agent-lens"
 
 [tool.poetry.dependencies]
 python = "^3.11"
