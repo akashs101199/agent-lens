@@ -2,7 +2,19 @@
 
 **Structured observability for AI agents — understand what your agent is doing, step by step.**
 
-![Status](https://img.shields.io/badge/status-production--ready-brightgreen) ![TypeScript](https://img.shields.io/badge/TypeScript-5.4%2B-blue) ![Python](https://img.shields.io/badge/Python-3.11%2B-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Built with Claude](https://img.shields.io/badge/Built%20with-Claude%20Code-purple)
+![Version](https://img.shields.io/badge/version-v1.0.0-brightgreen) ![Status](https://img.shields.io/badge/status-production--ready-brightgreen) ![TypeScript](https://img.shields.io/badge/TypeScript-5.4%2B-blue) ![Python](https://img.shields.io/badge/Python-3.11%2B-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Built with Claude](https://img.shields.io/badge/Built%20with-Claude%20Code-purple)
+
+## 🎉 v1.0.0 Released!
+
+**April 4, 2026** — AgentLens v1.0.0 is now available on [npm](https://www.npmjs.com/org/agentlens) and [PyPI](https://pypi.org/search/?q=agentlens).
+
+✅ TypeScript SDK (6 npm packages): `@agentlens/core`, `@agentlens/transport`, `@agentlens/privacy`, `@agentlens/interceptors`, `@agentlens/renderer`, `@agentlens/cli`
+
+✅ Python SDK (7 PyPI packages): `agentlens-core`, `agentlens-transport`, `agentlens-privacy`, `agentlens-interceptors`, `agentlens-renderer`, `agentlens-cli`, `agentlens`
+
+✅ **Built 100% with Claude Code** — 17,000+ lines of TypeScript & Python, 70+ tests, zero manual debugging
+
+[View Release Notes](https://github.com/akashs101199/agent-lens/releases/tag/v1.0.0) • [GitHub](https://github.com/akashs101199/agent-lens) • [Issues](https://github.com/akashs101199/agent-lens/issues)
 
 ---
 
@@ -168,30 +180,34 @@ Most existing observability tools fall into one of these categories:
 
 #### TypeScript / Node.js
 
+**Minimal setup:**
 ```bash
-npm install @agentlens/core @agentlens/transport @agentlens/renderer
+npm install @agentlens/core
 ```
 
-Or with SDK interceptors:
-
+**Full SDK support:**
 ```bash
 npm install @agentlens/core @agentlens/transport @agentlens/interceptors
-npm install @anthropic-ai/sdk  # or: npm install openai
+npm install @anthropic-ai/sdk  # For Anthropic
+# OR
+npm install openai              # For OpenAI
 ```
+
+**All packages:** Visit [npm @agentlens](https://www.npmjs.com/org/agentlens)
 
 #### Python 3.11+
 
+**Minimal setup:**
+```bash
+pip install agentlens-core
+```
+
+**Full installation:**
 ```bash
 pip install agentlens
 ```
 
-Or with specific SDK support:
-
-```bash
-pip install agentlens anthropic  # For Anthropic SDK
-pip install agentlens openai     # For OpenAI SDK
-pip install agentlens langchain  # For LangChain integration
-```
+**All packages:** Visit [PyPI agentlens search](https://pypi.org/search/?q=agentlens)
 
 ### 2. Initialize AgentLens
 
@@ -715,6 +731,43 @@ The project follows strict rules to ensure quality:
 6. **Async Non-Blocking** — Transports use async queues, never synchronous I/O
 7. **Privacy First** — Redaction runs before every transport write
 8. **ARLS Compliance** — Every event must conform to the schema
+
+---
+
+## Download & Install v1.0.0
+
+### TypeScript Packages (npm)
+
+| Package | Version | Link |
+|---------|---------|------|
+| **@agentlens/core** | 1.0.0 | [npm](https://www.npmjs.com/package/@agentlens/core) |
+| **@agentlens/transport** | 1.0.0 | [npm](https://www.npmjs.com/package/@agentlens/transport) |
+| **@agentlens/privacy** | 1.0.0 | [npm](https://www.npmjs.com/package/@agentlens/privacy) |
+| **@agentlens/interceptors** | 1.0.0 | [npm](https://www.npmjs.com/package/@agentlens/interceptors) |
+| **@agentlens/renderer** | 1.0.0 | [npm](https://www.npmjs.com/package/@agentlens/renderer) |
+| **@agentlens/cli** | 1.0.0 | [npm](https://www.npmjs.com/package/@agentlens/cli) |
+
+**Quick install:**
+```bash
+npm install @agentlens/core @agentlens/transport @agentlens/interceptors
+```
+
+### Python Packages (PyPI)
+
+| Package | Version | Link |
+|---------|---------|------|
+| **agentlens** | 1.0.0 | [PyPI](https://pypi.org/project/agentlens/) |
+| **agentlens-core** | 1.0.0 | [PyPI](https://pypi.org/project/agentlens-core/) |
+| **agentlens-transport** | 1.0.0 | [PyPI](https://pypi.org/project/agentlens-transport/) |
+| **agentlens-privacy** | 1.0.0 | [PyPI](https://pypi.org/project/agentlens-privacy/) |
+| **agentlens-interceptors** | 1.0.0 | [PyPI](https://pypi.org/project/agentlens-interceptors/) |
+| **agentlens-renderer** | 1.0.0 | [PyPI](https://pypi.org/project/agentlens-renderer/) |
+| **agentlens-cli** | 1.0.0 | [PyPI](https://pypi.org/project/agentlens-cli/) |
+
+**Quick install:**
+```bash
+pip install agentlens
+```
 
 ---
 
