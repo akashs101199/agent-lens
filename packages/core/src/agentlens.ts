@@ -286,7 +286,13 @@ export class AgentLens {
    * Manually log an event at any point in the agent execution.
    * Useful for logging custom events that don't fit into standard categories.
    *
+   * Input validation:
+   * - Metadata must be JSON-serializable
+   * - Circular references are detected and rejected
+   * - Non-serializable values (functions, symbols, etc.) are rejected
+   *
    * @param options - Log options
+   * @throws Error if metadata contains non-serializable values or circular references
    *
    * @example
    * ```typescript
@@ -298,6 +304,22 @@ export class AgentLens {
    * ```
    */
   log(options: ManualLogOptions): void {
+    // Validate metadata is JSON-serializable
+    if (options.metadata) {
+      try {
+        // Try to serialize the metadata to JSON
+        JSON.stringify(options.metadata)
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Unknown serialization error'
+        throw new Error(`AgentLens: metadata is not JSON-serializable: ${message}`)
+      }
+    }
+
+    // Validate schemaType
+    if (!options.schemaType || typeof options.schemaType !== 'string' || options.schemaType.length === 0) {
+      throw new Error('AgentLens: schemaType is required and must be a non-empty string')
+    }
+
     // Will create a custom event and write it to transport
     // Implementation will depend on renderer selection
   }

@@ -33,10 +33,15 @@ export const OPENAI_COSTS: Record<string, ModelCostTable> = {
 
 /**
  * Calculates the cost in USD for an LLM call.
- * @param tokens - Total tokens used
+ * Warns to stderr if the model is not in the cost table.
+ *
+ * @param inputTokens - Number of input tokens
+ * @param outputTokens - Number of output tokens
  * @param model - Model identifier
  * @param costs - Cost table to use
- * @returns Cost in USD
+ * @returns Cost in USD (0 if model is unknown)
+ *
+ * @internal
  */
 export function calculateCost(
   inputTokens: number,
@@ -46,7 +51,10 @@ export function calculateCost(
 ): number {
   const cost = costs[model]
   if (!cost) {
-    // Fallback: return 0 if model not found
+    // Warn about unknown model
+    process.stderr.write(
+      `[AgentLens] Warning: Cost estimation unavailable for model '${model}'. Cost will be reported as $0.00. Update your cost tables in packages/interceptors/src/costs.ts\n`
+    )
     return 0
   }
 

@@ -26,6 +26,8 @@ export interface RedactionOptions {
   mode: RedactionMode
   /** Maximum depth for recursive object redaction (default: 10) */
   maxDepth?: number
+  /** Minimum confidence level to redact (default: 'MEDIUM', meaning redact MEDIUM and HIGH) */
+  minConfidence?: 'HIGH' | 'MEDIUM'
 }
 
 /**
@@ -70,19 +72,30 @@ export function redactString(input: string, options: RedactionOptions): Redactio
       return { value: input, wasRedacted: false }
     }
 
+    // Filter by confidence level (default to MEDIUM, meaning redact both MEDIUM and HIGH)
+    const minConfidence = options.minConfidence ?? 'MEDIUM'
+    const confidenceLevels: Array<'HIGH' | 'MEDIUM'> = minConfidence === 'HIGH' ? ['HIGH'] : ['HIGH', 'MEDIUM']
+    const filteredMatches = allMatches.filter(m => confidenceLevels.includes(m.confidence))
+
+    if (filteredMatches.length === 0) {
+      return { value: input, wasRedacted: false }
+    }
+
     // Sort matches by start position (reverse order to avoid index shifting)
-    allMatches.sort((a, b) => b.start - a.start)
+    filteredMatches.sort((a, b) => b.start - a.start)
 
     let result = input
-    for (const match of allMatches) {
+    const redactedTypes: string[] = []
+    for (const match of filteredMatches) {
       const replacement = getRedactionReplacement(match.value, match.type, options.mode)
       result = result.substring(0, match.start) + replacement + result.substring(match.end)
+      redactedTypes.push(match.type)
     }
 
     return {
       value: result,
       wasRedacted: true,
-      redactedFields: allMatches.map((m) => m.type),
+      redactedFields: redactedTypes,
     }
   } catch {
     return { value: input, wasRedacted: false }
@@ -113,8 +126,9 @@ export function redactObject(
   try {
     const maxDepth = options.maxDepth ?? 10
     const redactedFields: string[] = []
+    const minConfidence = options.minConfidence ?? 'MEDIUM'
 
-    const redacted = redactRecursive(obj, maxDepth, redactedFields, options.mode)
+    const redacted = redactRecursive(obj, maxDepth, redactedFields, options.mode, minConfidence)
 
     return {
       value: redacted,
@@ -134,13 +148,14 @@ function redactRecursive(
   depth: number,
   redactedFields: string[],
   mode: RedactionMode,
+  minConfidence: 'HIGH' | 'MEDIUM',
 ): unknown {
   if (depth <= 0) {
     return value
   }
 
   if (typeof value === 'string') {
-    const result = redactString(value, { mode })
+    const result = redactString(value, { mode, minConfidence })
     if (result.wasRedacted && result.redactedFields) {
       redactedFields.push(...result.redactedFields)
     }
@@ -148,7 +163,7 @@ function redactRecursive(
   }
 
   if (Array.isArray(value)) {
-    return value.map((item) => redactRecursive(item, depth - 1, redactedFields, mode))
+    return value.map((item) => redactRecursive(item, depth - 1, redactedFields, mode, minConfidence))
   }
 
   if (value !== null && typeof value === 'object') {
@@ -157,7 +172,7 @@ function redactRecursive(
 
     for (const key in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
-        result[key] = redactRecursive(obj[key], depth - 1, redactedFields, mode)
+        result[key] = redactRecursive(obj[key], depth - 1, redactedFields, mode, minConfidence)
       }
     }
 

@@ -79,6 +79,29 @@ function detectDebugHint(code: string, message: string): string | undefined {
 }
 
 /**
+ * Sanitizes a stack trace by removing file paths and module names.
+ * Keeps only function names, line numbers, and column numbers for debugging.
+ * This prevents leaking internal code structure and file system paths.
+ *
+ * @param stack - The stack trace string to sanitize
+ * @returns Sanitized stack trace with paths removed
+ * @internal
+ */
+function sanitizeStackTrace(stack: string): string {
+  // Split into lines
+  const lines = stack.split('\n')
+
+  // Process each line: keep function name and position, remove full paths
+  return lines
+    .map((line) => {
+      // Pattern: "  at functionName (/full/path/to/file.ts:123:45)"
+      // Replace full paths with just filename:line:column
+      return line.replace(/\(\/[^)]*\/([^/]+):(\d+):(\d+)\)/, '($1:$2:$3)').replace(/\/[^)]*\/([^/:]+):(\d+):(\d+)/g, '$1:$2:$3')
+    })
+    .join('\n')
+}
+
+/**
  * Builds an LLM_CALL event from call data.
  */
 export function buildLLMEvent(data: LLMCallInput, agentName: string = 'unknown', phase: AgentPhase = 'IDLE'): ARLSEvent {
@@ -205,7 +228,8 @@ export function buildErrorEvent(error: unknown, context: string = 'unknown', age
   }
 
   if (stack !== undefined) {
-    errorData.stack = stack
+    // Sanitize stack trace to remove file paths and sensitive information
+    errorData.stack = sanitizeStackTrace(stack)
   }
 
   if (context !== 'unknown') {

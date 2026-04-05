@@ -65,6 +65,10 @@ export class FileTransport extends BaseTransport {
       try {
         await fs.appendFile(this.filePath, line, 'utf-8')
         this.currentFileSize += line.length
+
+        // Set secure file permissions (0600: read/write for owner only)
+        // Do this after first write to ensure file exists
+        await fs.chmod(this.filePath, 0o600)
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error)
         process.stderr.write(`[AgentLens] File write error: ${message}\n`)
@@ -75,6 +79,7 @@ export class FileTransport extends BaseTransport {
   /**
    * Rotate the log file when it exceeds maxFileSize.
    * Old files are renamed: agentlens.log → agentlens.1.log → agentlens.2.log, etc.
+   * Ensures rotated files have secure permissions (0600).
    */
   private async rotate(): Promise<void> {
     try {
@@ -90,6 +95,8 @@ export class FileTransport extends BaseTransport {
 
         try {
           await fs.rename(oldPath, newPath)
+          // Ensure rotated file has secure permissions
+          await fs.chmod(newPath, 0o600)
         } catch {
           // File might not exist, that's okay
         }
@@ -99,6 +106,8 @@ export class FileTransport extends BaseTransport {
       const newPath = `${basePath}.1${ext}`
       try {
         await fs.rename(this.filePath, newPath)
+        // Ensure rotated file has secure permissions
+        await fs.chmod(newPath, 0o600)
       } catch {
         // File might not exist yet
       }
